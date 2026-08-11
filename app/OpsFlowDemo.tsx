@@ -227,9 +227,9 @@ export function OpsFlowDemo() {
             <div className="notice" role="status"><Icon name="check" /><span>{notice}</span><button onClick={() => setNotice("")}>×</button></div>
 
             <div className="tabbar" role="tablist" aria-label={tr("데이터 보기", "Data views")}>
-              <button className={view === "validation" ? "active" : ""} onClick={() => setView("validation")}><Icon name="check" /> {tr("검증 결과", "Validation")} <span>{checked.length - validRows.length}</span></button>
-              <button className={view === "dashboard" ? "active" : ""} onClick={() => setView("dashboard")}><Icon name="chart" /> {tr("대시보드", "Dashboard")}</button>
-              <button className={view === "report" ? "active" : ""} onClick={() => setView("report")}><Icon name="report" /> {tr("리포트", "Report")}</button>
+              <button type="button" id="tab-validation" role="tab" aria-selected={view === "validation"} aria-controls="panel-validation" className={view === "validation" ? "active" : ""} onClick={() => setView("validation")}><Icon name="check" /> {tr("검증 결과", "Validation")} <span>{checked.length - validRows.length}</span></button>
+              <button type="button" id="tab-dashboard" role="tab" aria-selected={view === "dashboard"} aria-controls="panel-dashboard" className={view === "dashboard" ? "active" : ""} onClick={() => setView("dashboard")}><Icon name="chart" /> {tr("대시보드", "Dashboard")}</button>
+              <button type="button" id="tab-report" role="tab" aria-selected={view === "report"} aria-controls="panel-report" className={view === "report" ? "active" : ""} onClick={() => setView("report")}><Icon name="report" /> {tr("리포트", "Report")}</button>
             </div>
 
             <div className="toolbar">
@@ -239,7 +239,7 @@ export function OpsFlowDemo() {
             </div>
 
             {view === "validation" && (
-              <div className="table-card">
+              <div id="panel-validation" className="table-card" role="tabpanel" aria-labelledby="tab-validation" tabIndex={0}>
                 <div className="table-scroll"><table><thead><tr><th>{tr("검증", "Validation")}</th><th>{tr("레코드", "Record")}</th><th>{tr("날짜", "Date")}</th><th>{tr("채널", "Channel")}</th><th>{tr("캠페인", "Campaign")}</th><th>{tr("주문", "Orders")}</th><th>{tr("매출", "Revenue")}</th><th>{tr("환불률", "Refund rate")}</th><th>{tr("담당자", "Owner")}</th></tr></thead>
                   <tbody>{checked.map((row, index) => <tr key={`${row.id}-${index}`} className={row.status === "확인 필요" ? "flagged" : ""}><td><span className={`status ${row.status === "정상" ? "ok" : "warn"}`}>{row.issue}</span></td><td className="mono">{row.id}</td><td>{row.date.slice(5)}</td><td>{row.channel}</td><td><strong>{row.campaign}</strong></td><td>{row.orders.toLocaleString()}</td><td>{money.format(row.revenue)}</td><td>{row.refundRate}%</td><td>{row.owner || <em>{tr("미지정", "Unassigned")}</em>}</td></tr>)}</tbody>
                 </table></div>
@@ -248,7 +248,7 @@ export function OpsFlowDemo() {
             )}
 
             {view === "dashboard" && (
-              <div className="dashboard-grid">
+              <div id="panel-dashboard" className="dashboard-grid" role="tabpanel" aria-labelledby="tab-dashboard" tabIndex={0}>
                 <article className="kpi"><p>{tr("검증 통과 매출", "Validated revenue")}</p><strong>{money.format(revenue)}</strong><span>{tr("오류 행 제외 기준", "Invalid rows excluded")}</span></article>
                 <article className="kpi"><p>{tr("유효 주문", "Valid orders")}</p><strong>{orders.toLocaleString()}{tr("건", "")}</strong><span>{tr("채널 합산", "All channels")}</span></article>
                 <article className="kpi"><p>{tr("광고 수익률", "Return on ad spend")}</p><strong>{roas.toFixed(2)}×</strong><span>{tr("매출 ÷ 광고비", "Revenue ÷ ad spend")}</span></article>
@@ -259,7 +259,7 @@ export function OpsFlowDemo() {
             )}
 
             {view === "report" && (
-              <div className="report-layout">
+              <div id="panel-report" className="report-layout" role="tabpanel" aria-labelledby="tab-report" tabIndex={0}>
                 <article className="report-sheet"><div className="report-head"><div><span>FORBLUNE OPSFLOW</span><h4>{tr("주간 운영 성과 리포트", "Weekly operations report")}</h4><p>2026.08.06 — 2026.08.11</p></div><b>{tr("검증 완료", "Validated")}</b></div><div className="report-kpis"><div><span>{tr("매출", "Revenue")}</span><strong>{money.format(revenue)}</strong></div><div><span>{tr("주문", "Orders")}</span><strong>{orders.toLocaleString()}{tr("건", "")}</strong></div><div><span>ROAS</span><strong>{roas.toFixed(2)}×</strong></div></div><h5>{tr("자동 요약", "Automated summary")}</h5><p className="report-copy">{tr(`검증을 통과한 ${validRows.length}개 레코드를 기준으로 집계했습니다. 전체 ${checked.length}개 중 ${checked.length - validRows.length}개는 담당자 누락, 환불률 임계치 초과 또는 중복으로 분리되어 합계에서 제외되었습니다.`, `Metrics use ${validRows.length} validated records. ${checked.length - validRows.length} of ${checked.length} rows were excluded for missing owners, refund-rate exceptions, or duplicates.`)}</p><h5>{tr("검토 권장 사항", "Recommended review")}</h5><ul><li>{tr("확인 필요 항목의 원본 담당자를 지정한 뒤 재검증", "Assign owners to flagged source rows, then revalidate")}</li><li>{tr("환불률 10% 이상 캠페인의 상품·채널별 원인 확인", "Review product and channel causes for refund rates above 10%")}</li><li>{tr("중복 ID 제거 후 정제 CSV를 회계·운영팀에 전달", "Remove duplicate IDs before sharing the clean CSV")}</li></ul><footer>{tr("본 화면의 수치와 회사명은 포트폴리오용 가상 데이터입니다.", "All figures and names on this screen are synthetic portfolio data.")}</footer></article>
                 <aside className="report-actions"><div className="completion-ring"><span>92<small>%</small></span></div><h4>{tr("리포트 준비 완료", "Report ready")}</h4><p>{tr("검증 규칙, KPI, 예외 목록이 한 문서에 포함됩니다.", "Rules, KPIs, and exception lists are combined in one document.")}</p><button onClick={() => window.print()}><Icon name="report" /> {tr("인쇄 / PDF 저장", "Print / save PDF")}</button><button className="secondary" onClick={downloadCleanCsv}><Icon name="download" /> {tr("근거 데이터 받기", "Download source data")}</button></aside>
               </div>
