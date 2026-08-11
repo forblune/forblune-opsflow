@@ -239,8 +239,8 @@ export function OpsFlowDemo() {
             </div>
 
             {view === "validation" && (
-              <div id="panel-validation" className="table-card" role="tabpanel" aria-labelledby="tab-validation" tabIndex={0}>
-                <div className="table-scroll"><table><thead><tr><th>{tr("검증", "Validation")}</th><th>{tr("레코드", "Record")}</th><th>{tr("날짜", "Date")}</th><th>{tr("채널", "Channel")}</th><th>{tr("캠페인", "Campaign")}</th><th>{tr("주문", "Orders")}</th><th>{tr("매출", "Revenue")}</th><th>{tr("환불률", "Refund rate")}</th><th>{tr("담당자", "Owner")}</th></tr></thead>
+              <div className="table-card">
+                <div id="panel-validation" className="table-scroll" role="tabpanel" aria-labelledby="tab-validation" tabIndex={0}><table><thead><tr><th>{tr("검증", "Validation")}</th><th>{tr("레코드", "Record")}</th><th>{tr("날짜", "Date")}</th><th>{tr("채널", "Channel")}</th><th>{tr("캠페인", "Campaign")}</th><th>{tr("주문", "Orders")}</th><th>{tr("매출", "Revenue")}</th><th>{tr("환불률", "Refund rate")}</th><th>{tr("담당자", "Owner")}</th></tr></thead>
                   <tbody>{checked.map((row, index) => <tr key={`${row.id}-${index}`} className={row.status === "확인 필요" ? "flagged" : ""}><td><span className={`status ${row.status === "정상" ? "ok" : "warn"}`}>{row.issue}</span></td><td className="mono">{row.id}</td><td>{row.date.slice(5)}</td><td>{row.channel}</td><td><strong>{row.campaign}</strong></td><td>{row.orders.toLocaleString()}</td><td>{money.format(row.revenue)}</td><td>{row.refundRate}%</td><td>{row.owner || <em>{tr("미지정", "Unassigned")}</em>}</td></tr>)}</tbody>
                 </table></div>
                 <div className="table-footer"><span>{tr(`총 ${checked.length}건 중 ${validRows.length}건 통과`, `${validRows.length} of ${checked.length} rows passed`)}</span><span>{tr("검증 시각", "Validated at")} 2026.08.11 15:40</span></div>
