@@ -29,6 +29,8 @@ npm test
 
 화면의 회사, 캠페인, 매출 수치는 모두 가상 데이터입니다. 업로드한 CSV는 브라우저에서만 처리하며 별도 서버에 저장하지 않습니다.
 
+첫 화면의 시각 자료도 생성형 3D 이미지가 아니라 실제 데모와 같은 검증표 구조와 샘플 행을 사용합니다. 보이는 수치와 오류 상태는 아래 인터랙티브 데모에서 그대로 확인할 수 있습니다.
+
 ## English
 
 Forblune OpsFlow is a bilingual B2B operations portfolio demo that turns CSV and spreadsheet inputs into validated data, KPI dashboards, and export-ready reports. Use the `EN` switch in the header for an English experience suitable for Upwork, Contra, and international client proposals.

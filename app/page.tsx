@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Forblune OpsFlow",
     description: "데이터 취합부터 검증, 대시보드, 리포트까지 한 흐름으로.",
-    images: ["/opsflow-hero.png"],
+    images: ["/opsflow-proof-og.png"],
   },
 };
 
