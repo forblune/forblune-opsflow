@@ -1,7 +1,6 @@
 "use client";
 
 import { ChangeEvent, useEffect, useMemo, useState } from "react";
-import Image from "next/image";
 
 type View = "validation" | "dashboard" | "report";
 type Status = "정상" | "확인 필요";
@@ -181,9 +180,27 @@ export function OpsFlowDemo() {
             <div><dt>{tr("3종", "3 views")}</dt><dd>{tr("검증표·대시보드·리포트", "Validation · dashboard · report")}</dd></div>
           </dl>
         </div>
-        <div className="hero-art" role="img" aria-label={tr("데이터가 검증을 거쳐 대시보드와 리포트로 정리되는 추상 이미지", "Abstract data pipeline flowing through validation into a dashboard and report")}>
-          <Image src="/opsflow-hero.png" alt="" fill priority sizes="(max-width: 1080px) 100vw, 55vw" />
-          <div className="hero-art-badge"><span className="pulse" /> {tr("검증 규칙 실행 중", "Validation rules running")} <strong>12 / 12</strong></div>
+        <div className="hero-proof" aria-label={tr("실제 데모와 같은 검증 결과 미리보기", "Validation preview using the same sample data as the live demo")}>
+          <div className="hero-proof__topbar">
+            <div>
+              <span>{tr("8월 운영 데이터", "August operations data")}</span>
+              <strong>{tr("가져오기 완료", "Import complete")}</strong>
+            </div>
+            <span className="hero-proof__file">campaign-report.csv</span>
+          </div>
+          <div className="hero-proof__summary">
+            <div><strong>12</strong><span>{tr("읽은 행", "rows read")}</span></div>
+            <div><strong>9</strong><span>{tr("검증 통과", "passed")}</span></div>
+            <div><strong>3</strong><span>{tr("확인 필요", "to review")}</span></div>
+          </div>
+          <div className="hero-proof__table" role="table" aria-label={tr("샘플 검증 결과", "Sample validation results")}>
+            <div className="hero-proof__row hero-proof__row--header" role="row"><span>{tr("상태", "Status")}</span><span>ID</span><span>{tr("검증 결과", "Result")}</span></div>
+            <div className="hero-proof__row" role="row"><span className="result result--pass">{tr("통과", "Pass")}</span><span>OF-0811-01</span><strong>{tr("규칙 3개 통과", "3 rules passed")}</strong></div>
+            <div className="hero-proof__row hero-proof__row--review" role="row"><span className="result result--review">{tr("검토", "Review")}</span><span>OF-0809-02</span><strong>{tr("담당자 누락", "Missing owner")}</strong></div>
+            <div className="hero-proof__row hero-proof__row--review" role="row"><span className="result result--review">{tr("검토", "Review")}</span><span>OF-0808-02</span><strong>{tr("환불률 13.2%", "Refund rate 13.2%")}</strong></div>
+            <div className="hero-proof__row" role="row"><span className="result result--pass">{tr("통과", "Pass")}</span><span>OF-0806-02</span><strong>{tr("규칙 3개 통과", "3 rules passed")}</strong></div>
+          </div>
+          <div className="hero-proof__footer"><span className="pulse" /> {tr("오류 행은 보고서에서 제외됩니다", "Flagged rows stay out of the report")} <strong>9 / 12</strong></div>
         </div>
       </section>
 
