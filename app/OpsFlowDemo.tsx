@@ -302,9 +302,9 @@ export function OpsFlowDemo() {
         <div className="stack-row"><span>React 19</span><span>TypeScript</span><span>Responsive UI</span><span>CSV parsing</span><span>Deterministic rules</span><span>Accessible HTML</span></div>
       </section>
 
-      <section className="final-cta"><div><p>OPERATIONS, MADE CLEAR.</p><h2>{ko ? <>반복되는 데이터 업무를<br/>검증 가능한 흐름으로 바꿉니다.</> : <>Turn repetitive data work<br/>into a verifiable workflow.</>}</h2></div><a className="button light" href="#demo">{tr("데모 다시 보기", "Return to demo")} <Icon name="arrow" /></a></section>
+      <section className="final-cta"><div><p>OPERATIONS, MADE CLEAR.</p><h2>{ko ? <>반복되는 데이터 업무를<br/>검증 가능한 흐름으로 바꿉니다.</> : <>Turn repetitive data work<br/>into a verifiable workflow.</>}</h2></div><div className="final-cta__actions"><a className="button light" href="mailto:geonhee@forblune.com?subject=%5BOpsFlow%5D%20%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8%20%EB%AC%B8%EC%9D%98">{tr("프로젝트 문의", "Start a project")} <Icon name="arrow" /></a><a className="button ghost" href="#demo">{tr("데모 다시 보기", "Return to demo")}</a></div></section>
 
-      <footer className="site-footer"><div className="brand"><span className="brand-mark">F</span><span>Forblune <strong>OpsFlow</strong></span></div><p>Portfolio demo · Synthetic data only · 2026</p><a href="#top">{tr("맨 위로 ↑", "Back to top ↑")}</a></footer>
+      <footer className="site-footer"><div className="brand"><span className="brand-mark">F</span><span>Forblune <strong>OpsFlow</strong></span></div><p>Portfolio demo · Synthetic data only · 2026 · <a href="mailto:geonhee@forblune.com">geonhee@forblune.com</a></p><a href="#top">{tr("맨 위로 ↑", "Back to top ↑")}</a></footer>
     </main>
   );
 }
